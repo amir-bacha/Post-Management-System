@@ -5,7 +5,7 @@ const jwt=require('jsonwebtoken');
 const cookieParser=require('cookie-parser');
     // User Registration
 
-export const registerUser= async (req,res)=>{
+exports.registerUser= async (req,res)=>{
     try {
         let {name,email,password}=req.body;
     const userExist=await userModel.findOne({email});
@@ -42,7 +42,7 @@ export const registerUser= async (req,res)=>{
 };
 
  // User Login
-export const  userLogin=(req,res)=>{
+exports.userLogin= async (req,res)=>{
     try {
         
         let {email,password}=req.body;
@@ -63,15 +63,17 @@ export const  userLogin=(req,res)=>{
         }
         // create token 
         const token=jwt.sign(
-            {id:user._id,email:user.email},
-            "secretkey",
+            {
+            id:user._id,
+            email:user.email
+        },
+            process.env.JWT_SECRET,
             {expiresIn:"1h"}
         );
         // sending cookie
         res.cookie("token",token,{
             httpOnly:true,
-            secure:false,
-            samsite:"strict",
+            samsite:"lax",
             maxAge:24*60*1000,
         })
         res.status(200).json({

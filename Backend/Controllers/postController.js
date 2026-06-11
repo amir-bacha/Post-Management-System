@@ -6,14 +6,14 @@ exports.createPost = async (req,res)=>{
         const newPost=await postModel.create({
             title,
             content,
-            author:req.user._id,
+            author:req.user.id,
         });
         res.status(201).json({
-            sucess:true,
+            success:true,
             message:"Post created successful",
             newPost,
         })
-    } catch (error) {
+    } catch (error){
         res.status(500).json({
             success:false,
             message:error.message,
@@ -69,7 +69,7 @@ exports.upDatePost=async (req,res)=>{
  // Delete Post
  exports.deletePost=async (req,res)=>{
     try {
-        const deletingPost=await postModel.findOneAndUpdate(
+        const deletingPost=await postModel.findByIdAndDelete(
             {_id:req.params.id ,author:req.user._id},
            
         );

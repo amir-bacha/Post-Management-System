@@ -1,5 +1,7 @@
 const express=require('express');
+const Authenticated=require("../Middlewares/authintication");
 const router=express.Router();
+
 const {
     createPost,
     getAllPosts,
@@ -7,11 +9,11 @@ const {
     deletePost,
 }=require('../Controllers/postController');
 // create post
-router.post("/",createPost);
+router.post("/",Authenticated,createPost);
 // Read all post 
-router.get("/",getAllPosts);
+router.get("/",Authenticated,getAllPosts);
 // Update post
-router.post("/:id",upDatePost);
+router.post("/:id",Authenticated,upDatePost);
 // delete post
-router.delete("/:id",deletePost);
+router.delete("/:id",Authenticated,deletePost);
 module.exports=router;
