@@ -13,7 +13,7 @@ router.post("/",Authenticated,createPost);
 // Read all post 
 router.get("/",Authenticated,getAllPosts);
 // Update post
-router.post("/:id",Authenticated,upDatePost);
+router.put("/:id",Authenticated,upDatePost);
 // delete post
 router.delete("/:id",Authenticated,deletePost);
 module.exports=router;

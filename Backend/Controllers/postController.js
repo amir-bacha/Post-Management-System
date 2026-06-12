@@ -24,28 +24,28 @@ exports.createPost = async (req,res)=>{
 //  Get All Posts
 exports.getAllPosts=async (req,res)=>{
     try {
-        
         const posts=await postModel.find({
-            author:req.user._id,
+            author:req.user.id,
         });
         res.status(200).json({
             success:true,
             posts,
         });
+          console.log(posts);
     } catch (error) {
         res.status(500).json({
             success:false,
             message:error.message,
         });
     };
+  
 };
 exports.upDatePost=async (req,res)=>{
     try {
-        const {title,content}=req.body;
         const UpdatedPost=await postModel.findOneAndUpdate(
             { _id:req.params.id,author:req.user._id},
             { title,content },
-            { new:ture },
+            { new:true },
         );
         if(!upDatePost){
             res.status(404).json({
@@ -69,9 +69,10 @@ exports.upDatePost=async (req,res)=>{
  // Delete Post
  exports.deletePost=async (req,res)=>{
     try {
+        
         const deletingPost=await postModel.findByIdAndDelete(
-            {_id:req.params.id ,author:req.user._id},
-           
+            {_id:req.params.id ,author:req.user.id},
+            
         );
         if(!deletingPost){
             return res.status(404).json({
