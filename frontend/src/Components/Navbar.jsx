@@ -1,20 +1,20 @@
 const Navbar=()=>{
     return (
         <>
-        <div className="flex justify-between items-center  ">
-            <div>left</div>
-            <div className="">
-                <ul>
-                    <li><a href="/sign">Sign Up</a></li>
-                    <li><a href="/login">Login</a></li>
-                    <li><a href="/create">Create post</a></li>
-                    <li><a href="/update">Update post</a></li>
-                    <li><a href="/read">Read your post</a></li>
-                    <li><a href="/delete">Delete Post</a></li>
-                </ul>
+        <div className="flex justify-between items-center mt-9 ">
+            <div>Posts</div>
+
+            <div className="flex justify-items items-center gap-5">
+                <div className="flex">
+                    <h2>Users</h2>
+                </div>
+                <div>
+                    <h3>Posts</h3>
+                </div>
+                
             </div>
         </div>
         </>
     )
-}
+};
 export default Navbar;
