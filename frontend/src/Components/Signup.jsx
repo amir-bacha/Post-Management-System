@@ -22,6 +22,7 @@ import { useState } from "react";
       const response=await axios.post(
         " http://localhost:5000/api/user/register", formData
       );
+      
       console.log(response);
       alert("User created");
        setFormData({

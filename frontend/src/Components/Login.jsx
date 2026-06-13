@@ -1,7 +1,9 @@
+import axios from "axios";
 import { useState } from "react";
 import { Link } from 'react-router-dom';
   const  Login=()=>{ 
   const [err,setErr]=useState("");
+  const [showMessage,setShowMessage]=useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -19,14 +21,26 @@ import { Link } from 'react-router-dom';
         setErr("this is field must be required");
       }
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
    Validation();
-    console.log(formData);
-    setFormData({
-        email:"",
-        password:"",
-    })
+   try {
+     const response=await axios.post(
+      "http://localhost:5000/api/user/login",formData,
+     )
+         console.log(response)
+         console.log(response.message);
+         setFormData({
+          email:"",
+          password:"",
+         })
+         setShowMessage(true);
+         setTimeout(() => {
+          setShowMessage(false)
+         }, 4000);
+   } catch (error) {
+    console.log(error);
+   }
   };
 
   return (
@@ -81,6 +95,12 @@ import { Link } from 'react-router-dom';
               Login
             </button>
           </form>
+              {showMessage && (
+                <div className="fixed top-5 right-5 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg">
+              <h3>Login successful</h3> 
+              </div>
+              )}
+
 
           <p className="text-center text-gray-600 mt-6">
             Don't have an account?{" "}

@@ -1,7 +1,9 @@
+import axios from "axios";
 import { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 
 const PostForm=()=>{
+  const [showMessage,setShowMessage]=useState(false);
   const [formData,setFormData]=useState({
     title:"",
     content:"",
@@ -13,13 +15,25 @@ const PostForm=()=>{
       [name]:value,
     }));
   };
-  const submitHandler=(e)=>{
+  const submitHandler= async (e)=>{
     e.preventDefault();
-    console.log(formData);
-    setFormData({
+        try {
+      const response=await axios.post(
+        "http://localhost:5000/api/post/", formData
+      );
+      console.log(responsive.message);
+      setShowMessage(true);
+
+      
+       setFormData({
       title:"",
       content:"",
     })
+
+    } catch (error) {
+      console.log(error);
+    }
+    
   }
   return (
     <>
@@ -51,6 +65,11 @@ const PostForm=()=>{
         className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition"
         >submit post</button>
       </form>
+      {showMessage && (
+                <div className="fixed top-5 right-5 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg">
+              <h3>Login successful</h3> 
+              </div>
+              )}
       <Link
        className="absolute top-4 left-4 bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition" 
        to="/"> 
