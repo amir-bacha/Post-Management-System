@@ -10,12 +10,10 @@ const Navbar=()=>{
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols- gap-2 mt-12 max-w-4xl max-auto" >
-                <a href="/"><div className="py-3 px-10 bg-gray-900 text-white rounded display-inblock w-fit mb-6">create post</div></a>
-                <a href="/"><div className="py-3 px-10 bg-gray-900 text-white rounded display-inblock w-fit mb-6" >create post</div></a>
-                <a href="/"><div className="py-3 px-10 bg-gray-900 text-white rounded display-inblock w-fit mb-6">Update post</div></a>
-                <a href="/"><div className="py-3 px-10 bg-gray-900 text-white rounded display-inblock w-fit mb-6">Read post</div></a>
-                <a href="/"><div className="py-3 px-10 bg-gray-900 text-white rounded display-inblock w-fit mb-6">Delete post</div></a>
-    
+                <Link to="/create"><div className="py-3 px-10 bg-gray-900 text-white rounded display-inblock w-fit mb-6">create post</div></Link>
+                <Link to="/update"><div className="py-3 px-10 bg-gray-900 text-white rounded display-inblock w-fit mb-6">update post</div></Link>
+                <Link to="/read"><div className="py-3 px-10 bg-gray-900 text-white rounded display-inblock w-fit mb-6">read posts</div></Link>
+                <Link to="/delete"><div className="py-3 px-10 bg-gray-900 text-white rounded display-inblock w-fit mb-6">delete post</div></Link>    
             </div>
         </div>
         </>

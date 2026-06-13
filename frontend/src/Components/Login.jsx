@@ -1,20 +1,27 @@
 import { useState } from "react";
 import { Link } from 'react-router-dom';
   const  Login=()=>{ 
+  const [err,setErr]=useState("");
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-
+ 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
+  
   };
-
+  const Validation=()=>{
+    if(formData.email===""){
+        setErr("this is field must be required");
+      }
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
+   Validation();
     console.log(formData);
     setFormData({
         email:"",
@@ -46,8 +53,9 @@ import { Link } from 'react-router-dom';
                 value={formData.email}
                 onChange={handleChange}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
-                required
+
               />
+              <div className="text-red-600"> {err}</div>
             </div>
 
             <div>

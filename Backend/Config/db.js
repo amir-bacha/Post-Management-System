@@ -1,7 +1,7 @@
 const mongoose=require('mongoose');
 const DBconnection=async ()=>{
     try {
-        await mongoose.connect("mongodb://localhost:27017/POSTS");
+        await mongoose.connect("mongodb://localhost:27017/OnlineForm");
         console.log("DB connected");
     } catch (error) {
         console.log(error);

@@ -1,5 +1,5 @@
+import axios from 'axios'
 import { useState } from "react";
-
  const  Signup=() =>{
   const [formData, setFormData] = useState({
     name: "",
@@ -14,15 +14,24 @@ import { useState } from "react";
    });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
-    setFormData({
+   
+    try {
+      const response=await axios.post(
+        " http://localhost:5000/api/user/register", formData
+      );
+      console.log(response);
+      alert("User created");
+       setFormData({
       name:"",
       email:"",
       password:"",
     })
-
+    } catch (error) {
+      console.log(error.response);
+    }
   };
 
   return (
@@ -37,7 +46,9 @@ import { useState } from "react";
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form
+
+         onSubmit={handleSubmit} className="space-y-5">
           {/* Full Name */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
