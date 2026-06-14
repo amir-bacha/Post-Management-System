@@ -19,12 +19,12 @@ const PostForm=()=>{
     e.preventDefault();
         try {
       const response=await axios.post(
-        "http://localhost:5000/api/post/", formData
+        "http://localhost:5000/api/post",
+         formData,
+        { withCredentials:true }
       );
-      console.log(responsive.message);
-      setShowMessage(true);
-
       
+      setShowMessage(true);
        setFormData({
       title:"",
       content:"",
@@ -38,7 +38,7 @@ const PostForm=()=>{
   return (
     <>
     <div className="flex items-center justify-center bg-gray-100 px-4">
-      <form action=""
+      <form 
       onSubmit={submitHandler}
       className="w-full max-w-md bg-white p-6 rounded-xl shadow-md"
       >

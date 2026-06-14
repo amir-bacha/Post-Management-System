@@ -44,7 +44,6 @@ exports.registerUser= async (req,res)=>{
  // User Login
 exports.userLogin= async (req,res)=>{
     try {
-        
         let {email,password}=req.body;
         // check wheither the user exist
         let user=await userModel.findOne({email});
@@ -55,27 +54,27 @@ exports.userLogin= async (req,res)=>{
         };
 
         // check password
-        const isMatch=bcrypt.compare(password,user.password);
+        const isMatch= await bcrypt.compare(password,user.password);
         if(!isMatch){
-            res.status(400).json({
+            return  res.status(400).json({
                 message:"invalid credentionals",
             })
         }
         // create token 
         const token=jwt.sign(
             {
-            id:user._id,
-            email:user.email
-        },
+            id: user._id},
             process.env.JWT_SECRET,
-            {expiresIn:"1h"}
+            { expiresIn:"1h" }
         );
+        console.log(token);
         // sending cookie
         res.cookie("token",token,{
             httpOnly:true,
-            samsite:"lax",
-            maxAge:24*60*1000,
-        })
+            secure:false,
+            sameSite:"lax",
+            maxAge:24*60*60*1000,
+        });
         res.status(200).json({
             message:"Login successful",
         })
